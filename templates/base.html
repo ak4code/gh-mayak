@@ -1,0 +1,49 @@
+{% load solo_tags %}
+{% load webpack_loader %}
+{% get_solo 'cms.SiteConfig' as mayak %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="language" content="RU">
+    <title>{% block title %}{{ mayak.site_name }} | ст. Голубицкая{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ mayak.favicon.url }}">
+    <meta name="robots" content="index,follow"/>
+    <meta name="description" content="{% block meta_description %}{{ mayak.meta_description }}{% endblock %}">
+    <meta name="keywords" content="Гостевой дом, отдых на море, Голубицкая, Азовское море, Маяк, номера, бассейн">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    {% get_files 'app' 'js' as app_js_files %}
+    {% get_files 'app' 'css' as app_css_files %}
+    {% for js_file in app_js_files %}
+        <link href="{{ js_file.url }}" rel="preload" as="script">
+    {% endfor %}
+    {% if not debug %}
+        {% get_files 'chunk-vendors' 'js' as chunk_js_files %}
+        {% for js_file in chunk_js_files %}
+            <link href="{{ js_file.url }}" rel="preload" as="script">
+        {% endfor %}
+    {% endif %}
+    {% for css_file in app_css_files %}
+        <link href="{{ css_file.url }}" rel="preload" as="style">
+    {% endfor %}
+    {% render_bundle 'app' 'css' %}
+</head>
+<body>
+<div id="app">
+    <header class="m-header">
+
+    </header>
+    {% block layout %}
+        {% block content %}
+
+        {% endblock %}
+    {% endblock %}
+</div>
+{% if not debug %}
+    {% render_bundle 'chunk-vendors' 'js' %}
+{% endif %}
+{% render_bundle 'app' 'js' %}
+</body>
+</html>
