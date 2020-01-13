@@ -1,3 +1,5 @@
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.urls import reverse
 from solo.models import SingletonModel
@@ -50,3 +52,37 @@ class Page(SEOBase):
     class Meta:
         verbose_name = 'Страница'
         verbose_name_plural = 'Страницы'
+
+
+class Menu(models.Model):
+    POSITON_CHOICES = (
+        (None, 'Выберите позицию'),
+        ('main', 'Главное меню'),
+        ('side', 'Боковое меню'),
+        ('footer', 'Подвал'),
+    )
+    name = models.CharField(max_length=200, verbose_name='Название меню')
+    position = models.CharField(max_length=100, choices=POSITON_CHOICES, unique=True, db_index=True,
+                                verbose_name='Позиция')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Меню'
+        verbose_name_plural = 'Меню'
+
+
+class MenuItem(models.Model):
+    menu = models.ForeignKey(Menu, related_name='items', on_delete=models.CASCADE, verbose_name='Меню')
+    name = models.CharField(max_length=200, verbose_name='Название')
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, verbose_name='Тип контента')
+    object_id = models.PositiveIntegerField(verbose_name='ID обьекта')
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Пункт меню'
+        verbose_name_plural = 'Пункты меню'

@@ -32,14 +32,43 @@
 </head>
 <body>
 <div id="app">
-    <header class="m-header">
+    <div class="uk-container">
+        <header class="m-header">
+            <div class="uk-flex uk-flex-wrap uk-flex-middle">
+                <div class="uk-width-1-4">
+                    <div class="m-logo">
+                        <a href="/">
+                            <img src="{{ mayak.logo.url }}" alt="{{ mayak.site_name }}" class="uk-responsive-height">
+                        </a>
+                    </div>
+                </div>
+                <div class="uk-width-auto">
 
-    </header>
-    {% block layout %}
-        {% block content %}
+                </div>
+            </div>
+        </header>
+        <nav class="m-topnav uk-navbar-container uk-visible@m uk-navbar" uk-navbar>
+            <div class="uk-navbar-center">
+                <ul class="uk-navbar-nav">
+                    <li><a href="/" title="Гостевой дом Маяк">Главная</a></li>
+                    <li><a href="/price/" title="Цены">Цены</a></li>
+                    <li><a href="/reservation/" title="Бронирование">Бронирование</a></li>
+                    <li><a href="/gallery/" title="Фото">Фото</a></li>
+                    <li><a href="/comments/" title="Отзывы">Отзывы</a></li>
+                    <li><a href="/transfer/" title="Трансфер">Трансфер</a></li>
+                    <li><a href="/contacts/" title="Контакты">Контакты</a></li>
+                </ul>
+            </div>
+        </nav>
+        {% block layout %}
+            {% block content %}
 
+            {% endblock %}
         {% endblock %}
-    {% endblock %}
+        <footer class="m-footer">
+
+        </footer>
+    </div>
 </div>
 {% if not debug %}
     {% render_bundle 'chunk-vendors' 'js' %}

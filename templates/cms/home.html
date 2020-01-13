@@ -1,5 +1,10 @@
 {% extends 'layouts/fullwidth.html' %}
 
+{% block page_title %}{% if mayak.front_page %}{{ mayak.front_page.title }}{% else %}{{ mayak.site_name }}{% endif %}
+{% endblock %}
+
 {% block content %}
-    <h1>Маяк</h1>
+    <div class="uk-card uk-card-default uk-card-body">
+        {{ mayak.front_page.content | safe }}
+    </div>
 {% endblock %}
