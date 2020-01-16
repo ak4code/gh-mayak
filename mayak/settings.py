@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'filebrowser',
     'solo',
     'webpack_loader',
+    'genericadmin',
 
     'cms.apps.CmsConfig',
 ]

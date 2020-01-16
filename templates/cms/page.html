@@ -1,0 +1,11 @@
+{% extends 'layouts/fullwidth.html' %}
+
+{% block title %}{{ page.meta_title }} | {{ block.super }}{% endblock %}
+{% block meta_description %}{{ page.meta_description }}{% endblock %}
+{% block page_title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+    <div class="uk-card uk-card-default uk-card-body">
+        {{ page.content | safe }}
+    </div>
+{% endblock %}

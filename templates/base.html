@@ -1,5 +1,6 @@
 {% load solo_tags %}
 {% load webpack_loader %}
+{% load navigations %}
 {% get_solo 'cms.SiteConfig' as mayak %}
 <!DOCTYPE html>
 <html lang="ru">
@@ -19,12 +20,12 @@
     {% for js_file in app_js_files %}
         <link href="{{ js_file.url }}" rel="preload" as="script">
     {% endfor %}
-    {% if not debug %}
-        {% get_files 'chunk-vendors' 'js' as chunk_js_files %}
-        {% for js_file in chunk_js_files %}
-            <link href="{{ js_file.url }}" rel="preload" as="script">
-        {% endfor %}
-    {% endif %}
+
+    {% get_files 'chunk-vendors' 'js' as chunk_js_files %}
+    {% for js_file in chunk_js_files %}
+        <link href="{{ js_file.url }}" rel="preload" as="script">
+    {% endfor %}
+
     {% for css_file in app_css_files %}
         <link href="{{ css_file.url }}" rel="preload" as="style">
     {% endfor %}
@@ -42,22 +43,61 @@
                         </a>
                     </div>
                 </div>
-                <div class="uk-width-auto">
-
+                <div class="uk-width-expand uk-visible@m">
+                    <div class="m-header-phone uk-text-right">
+                        {{ mayak.phone }}
+                    </div>
+                </div>
+                <div class="uk-width-expand uk-hidden@m">
+                    <a href="#m-offcanvas" class="uk-text-right uk-align-right uk-margin-remove" uk-toggle>
+                        <span uk-navbar-toggle-icon></span> <span class="uk-margin-small-left">Меню</span>
+                    </a>
                 </div>
             </div>
         </header>
+        <div id="m-offcanvas" uk-offcanvas="overlay: true">
+            <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+                <div class="m-logo">
+                    <a href="/">
+                        <img src="{{ mayak.logo.url }}" alt="{{ mayak.site_name }}" class="uk-responsive-height">
+                    </a>
+                </div>
+                <hr>
+                {% nav_menu 'main' as mobile_menu %}
+                {% if mobile_menu %}
+                    <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+                        {% for item in mobile_menu.items.all %}
+                            <li>
+                                <a href="{{ item.get_link }}"
+                                   title="{{ item.name }}">
+                                    {{ item.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <hr>
+                <div>
+                    <p>{{ mayak.phone }}</p>
+                    <p>{{ mayak.address }}</p>
+                </div>
+            </div>
+        </div>
         <nav class="m-topnav uk-navbar-container uk-visible@m uk-navbar" uk-navbar>
             <div class="uk-navbar-center">
-                <ul class="uk-navbar-nav">
-                    <li><a href="/" title="Гостевой дом Маяк">Главная</a></li>
-                    <li><a href="/price/" title="Цены">Цены</a></li>
-                    <li><a href="/reservation/" title="Бронирование">Бронирование</a></li>
-                    <li><a href="/gallery/" title="Фото">Фото</a></li>
-                    <li><a href="/comments/" title="Отзывы">Отзывы</a></li>
-                    <li><a href="/transfer/" title="Трансфер">Трансфер</a></li>
-                    <li><a href="/contacts/" title="Контакты">Контакты</a></li>
-                </ul>
+                {% nav_menu 'main' as main_menu %}
+                {% if main_menu %}
+                    <ul class="uk-navbar-nav">
+                        {% for menu_item in main_menu.items.all %}
+                            <li>
+                                <a href="{{ menu_item.get_link }}"
+                                   title="{{ menu_item.name }}">
+                                    {{ menu_item.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
         </nav>
         {% block layout %}
@@ -70,9 +110,7 @@
         </footer>
     </div>
 </div>
-{% if not debug %}
-    {% render_bundle 'chunk-vendors' 'js' %}
-{% endif %}
+{% render_bundle 'chunk-vendors' 'js' %}
 {% render_bundle 'app' 'js' %}
 </body>
 </html>
