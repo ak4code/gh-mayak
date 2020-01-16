@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block layout %}
+    <div class="uk-width-1-1">
+        <div class="m-title-background uk-flex uk-flex-center uk-flex-middle">
+            <h1 class="m-title uk-text-center">{% block page_title %}{% endblock %}</h1>
+        </div>
+    </div>
+    <div class="uk-flex uk-flex-wrap uk-margin-small uk-grid-match uk-grid-small" uk-grid>
+        <div class="uk-width-3-4@m">
+            <main class="m-page">
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+        <div class="uk-width-1-4@m">
+            {% block aside %}{% endblock %}
+            <div class="uk-card uk-card-small uk-card-body uk-card-default uk-margin-small">
+                <reservation></reservation>
+            </div>
+            <div class="uk-card uk-card-small uk-card-body uk-card-primary uk-margin-small">
+                <h4 class="uk-h4 uk-heading-line"><span>Погода</span></h4>
+                <div id="SinoptikInformer" style="width:100%;" class="SinoptikInformer type1c1">
+                    <div class="siHeader">
+                        <div class="siLh">
+                            <div class="siMh"><a onmousedown="siClickCount();" href="https://sinoptik.com.ru/"
+                                                 target="_blank" rel="nofollow">Погода</a><a
+                                    onmousedown="siClickCount();" class="siLogo" href="https://sinoptik.com.ru/"
+                                    target="_blank" rel="nofollow"> </a> <span id="siHeader"></span></div>
+                        </div>
+                    </div>
+                    <div class="siBody">
+                        <div class="siCity">
+                            <div class="siCityName"><a onmousedown="siClickCount();"
+                                                       href="https://sinoptik.com.ru/погода-голубицкая"
+                                                       target="_blank" rel="nofollow">Погода в
+                                <span>Голубицкой</span></a></div>
+                            <div id="siCont0" class="siBodyContent">
+                                <div class="siLeft">
+                                    <div class="siTerm"></div>
+                                    <div class="siT" id="siT0"></div>
+                                    <div id="weatherIco0"></div>
+                                </div>
+                                <div class="siInf"><p>влажность: <span id="vl0"></span></p>
+                                    <p>давление: <span id="dav0"></span></p>
+                                    <p>ветер: <span id="wind0"></span></p></div>
+                            </div>
+                        </div>
+                        <div class="siLinks"><span><a onmousedown="siClickCount();"
+                                                      href="https://sinoptik.com.ru/погода-темрюк-100483661"
+                                                      target="_blank"
+                                                      rel="nofollow">Погода в Темрюке</a>&nbsp;</span></div>
+                    </div>
+                    <div class="siFooter">
+                        <div class="siLf">
+                            <div class="siMf"></div>
+                        </div>
+                    </div>
+                </div>
+                <script type="application/javascript" charset="UTF-8"
+                        src="//sinoptik.com.ru/informers_js.php?title=4&amp;wind=3&amp;cities=100560513&amp;lang=ru"></script>
+            </div>
+        </div>
+    </div>
+{% endblock %}

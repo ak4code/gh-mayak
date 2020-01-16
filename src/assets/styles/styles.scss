@@ -31,7 +31,7 @@ a {
   margin-top: 20px;
   border-radius: 20px 20px 0 0;
   .m-header-phone {
-    color: $primary-color;
+    color: $base-heading-color;
     font-size: 1.5rem;
   }
 }
@@ -79,4 +79,10 @@ a {
     width: 100%;
     margin-bottom: 20px;
     background: #fff;
+}
+
+.m-reservation {
+  .uk-input, .uk-select, .uk-textarea {
+    border: 1px solid rgba(5, 78, 113, 0.5);
+  }
 }
