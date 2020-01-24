@@ -1,3 +1,8 @@
 from django.contrib import admin
+from adminsortable.admin import SortableAdmin
+from .models import Photo
 
-# Register your models here.
+
+@admin.register(Photo)
+class PhotoAdmin(SortableAdmin):
+    list_display = ['name', 'image_tag', ]

@@ -21,8 +21,11 @@ INSTALLED_APPS = [
     'solo',
     'webpack_loader',
     'genericadmin',
+    'adminsortable',
+    'import_export',
 
     'cms.apps.CmsConfig',
+    'hotel.apps.HotelConfig',
 ]
 
 MIDDLEWARE = [
