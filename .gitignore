@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-/dist
 
 # local env files
 .env.local
@@ -47,3 +46,4 @@ ENV/
 env.bak/
 venv.bak/
 webpack-stats.json
+/src/
