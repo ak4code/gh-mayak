@@ -47,3 +47,10 @@ env.bak/
 venv.bak/
 webpack-stats.json
 /src/
+/.browserslistrc
+/.editorconfig
+/.eslintrc.js
+/babel.config.js
+/package.json
+/package-lock.json
+/vue.config.js
