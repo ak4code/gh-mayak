@@ -46,3 +46,4 @@ ENV/
 env.bak/
 venv.bak/
 webpack-stats.json
+webpack-prod-stats.json
