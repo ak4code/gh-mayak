@@ -1,0 +1,23 @@
+{% extends 'layouts/default.html' %}
+
+{% block title %}Фотографии | {{ block.super }}{% endblock %}
+{% block meta_description %}{{ block.super }}{% endblock %}
+{% block page_title %}Фотографии{% endblock %}
+
+{% block content %}
+    <div class="uk-card uk-card-default uk-card-body">
+        <div class="uk-flex uk-flex-wrap uk-grid-small uk-child-width-1-2 uk-child-width-1-4@m" uk-lightbox>
+            {% for photo in photo_list %}
+                <div>
+                    <a href="{{ photo.image.url }}" data-caption="{{ photo.name }}">
+                        <div class="uk-cover-container">
+                            <canvas height="200"></canvas>
+                            <img src="{{ photo.image.url }}" alt="{{ photo.name }}" uk-cover>
+                        </div>
+                        <h5 class="uk-text-center uk-margin-small uk-text-small">{{ photo.name }}</h5>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
