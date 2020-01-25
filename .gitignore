@@ -54,3 +54,5 @@ webpack-stats.json
 /package-lock.json
 /vue.config.js
 /dist/index.html
+!/mayak/local_settings.py
+/mayak/local_settings.py
