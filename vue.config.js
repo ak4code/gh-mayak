@@ -8,7 +8,7 @@ module.exports = {
   css: {
     extract: true
   },
-
+  filenameHashing: false,
   configureWebpack: {
     plugins: [
       new BundleTracker({ filename: process.env.NODE_ENV === 'production' ? './webpack-prod-stats.json' : './webpack-stats.json' })
