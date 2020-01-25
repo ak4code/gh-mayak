@@ -9,6 +9,8 @@ WEBPACK_LOADER = {
     }
 }
 
+APP_VERSION = 1.0
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
