@@ -23,3 +23,11 @@ class Photo(SortableMixin):
             return mark_safe('<img src="https://via.placeholder.com/50" width="50" height="50" />')
 
     image_tag.short_description = 'Просмотр изображения'
+
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=150, verbose_name='Имя')
+    text = models.TextField(blank=True, null=True, verbose_name='Отзыв')
+
+    def __str__(self):
+        return self.name
