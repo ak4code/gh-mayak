@@ -13,7 +13,7 @@ let config = {
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
   xsrfCookieName: 'csrftoken',
-  xsrfHeaderName: 'X-CSRFTOKEN',
+  xsrfHeaderName: 'X-CSRFTOKEN'
 }
 
 const _axios = axios.create(config)
