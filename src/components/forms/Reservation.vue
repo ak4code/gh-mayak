@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="uk-margin">
-        <label class="uk-form-label" for="phone">Ваш email</label>
+        <label class="uk-form-label" for="email">Ваш email</label>
         <div class="uk-form-controls">
           <input class="uk-input" name="email" id="email" type="email" placeholder="ivanov@mail.ru" required>
         </div>
@@ -54,10 +54,10 @@
 </template>
 
 <script>
-    export default {
-        name: "reservation",
-        methods: {}
-    }
+export default {
+  name: 'reservation',
+  methods: {}
+}
 </script>
 
 <style scoped>

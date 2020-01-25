@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/filebrowser/', site.urls),
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
+    path('hotel/', include('hotel.urls')),
     path('', include('cms.urls')),
 ]
 
