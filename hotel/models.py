@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from adminsortable.models import SortableMixin
 
+
 class Photo(SortableMixin):
     image = models.ImageField(upload_to='gallery/%Y', verbose_name='Файл в формате (jpg, gif, png)')
     name = models.CharField(max_length=200, default='Фото', verbose_name='Название фото')
