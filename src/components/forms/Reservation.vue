@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="uk-margin">
-       <button type="submit" class="uk-button uk-button-primary uk-width-1-1">Забронировать</button>
+        <button type="submit" class="uk-button uk-button-primary uk-width-1-1">Забронировать</button>
       </div>
     </form>
   </div>
@@ -55,7 +55,8 @@
 
 <script>
     export default {
-        name: "reservation"
+        name: "reservation",
+        methods: {}
     }
 </script>
 
