@@ -91,7 +91,10 @@
                         this.loading = false
                         this.status = r.data.status
                     })
-                    .catch(e => console.dir(e))
+                    .catch(e => {
+                        this.loading = false
+                        console.dir(e)
+                    })
             },
             sendAgain () {
                 this.booking = {

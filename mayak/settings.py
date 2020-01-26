@@ -95,6 +95,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATETIME_FORMAT = "d.m.Y H:M"
+DATE_FORMAT = "d.m.Y"
+SHORT_DATE_FORMAT = "d.m.Y"
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
@@ -134,5 +138,16 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
-    ]
+    ],
+    'DATETIME_FORMAT': "%d.%m.%Y %H:%M",
+    'DATE_FORMAT': "%d.%m.%Y"
 }
+
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+DEFAULT_TO_EMAIL = config('DEFAULT_TO_EMAIL')
+
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = config('EMAIL_USE_SSL')

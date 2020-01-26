@@ -50,7 +50,7 @@ class Booking(models.Model):
     persons = models.IntegerField(default=1, verbose_name='Количество человек')
 
     def __str__(self):
-        return f'Заявка от ${self.first_name} c ${self.start_date} по ${self.end_date}'
+        return f'Заявка от {self.first_name} c {self.start_date} по {self.end_date}'
 
     class Meta:
         verbose_name = 'Бронирование'

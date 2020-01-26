@@ -4,6 +4,7 @@ import UIkit from 'uikit'
 import '@/assets/styles/styles.scss'
 import Icons from 'uikit/dist/js/uikit-icons'
 import Reservation from './components/forms/Reservation'
+import FeedbackForm from './components/forms/FeedbackForm'
 
 Vue.config.productionTip = false
 UIkit.use(Icons)
@@ -11,6 +12,7 @@ UIkit.use(Icons)
 const app = new Vue({
   el: '#app',
   components: {
-    Reservation
+    Reservation,
+    FeedbackForm,
   }
 })

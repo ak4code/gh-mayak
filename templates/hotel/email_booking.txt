@@ -1,0 +1,6 @@
+Имя гостя: {{ booking.first_name }}
+Телефон гостя: {{ booking.phone }}
+Email гостя: {{ booking.email }}
+Количество человек: {{ booking.persons }}
+Дата заезда: {{ booking.start_date }}
+Дата отъезда: {{ booking.end_date }}
