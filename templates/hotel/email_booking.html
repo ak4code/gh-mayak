@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Новая заявка на сайте!</title>
+    <style>
+        body {
+            width: 350px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<h1>Новая заявка на сайте!</h1>
+<h2>Контактная информация</h2>
+<ul>
+    <li><strong>Имя гостя: </strong>{{ booking.first_name }}</li>
+    <li><strong>Телефон гостя: </strong>{{ booking.phone }}</li>
+    <li><strong>Email гостя: </strong>{{ booking.email }}</li>
+    <li><strong>Количество человек: </strong>{{ booking.persons }}</li>
+    <li><strong>Дата заезда: </strong>{{ booking.start_date }}</li>
+    <li><strong>Дата отъезда: </strong>{{ booking.end_date }}</li>
+</ul>
+</body>
+</html>

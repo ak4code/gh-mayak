@@ -1,0 +1,11 @@
+{% extends 'layouts/default.html' %}
+
+{% block title %}Отзывы | {{ block.super }}{% endblock %}
+{% block meta_description %}{{ block.super }}{% endblock %}
+{% block page_title %}Отзывы{% endblock %}
+
+{% block content %}
+    <div class="uk-card uk-card-default uk-card-body">
+        <feedback-form is-auth="{{ user.is_authenticated }}"></feedback-form>
+    </div>
+{% endblock %}
