@@ -16,3 +16,4 @@ class BookingAdmin(admin.ModelAdmin):
 @admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
     list_display = ['name', 'city', 'created_at', ]
+    list_filter = ('answers', )

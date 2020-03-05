@@ -7,23 +7,24 @@
         <div id="feedback-form" uk-modal>
           <div class="uk-modal-dialog uk-modal-body">
             <button class="uk-modal-close-default" type="button" uk-close></button>
-            <form class="uk-form-stacked uk-dark">
+            <form class="uk-form-stacked uk-dark" v-on:submit.prevent="sendFeedback">
               <div class="uk-margin">
                 <label class="uk-form-label" for="name">Ваше Имя</label>
                 <div class="uk-form-controls">
-                  <input class="uk-input" name="name" id="name" type="text" required>
+                  <input class="uk-input" v-model="feedback.name" name="name" id="name" type="text" required>
                 </div>
               </div>
               <div class="uk-margin">
                 <label class="uk-form-label" for="city">Город</label>
                 <div class="uk-form-controls">
-                  <input class="uk-input" name="city" id="city" type="text" required>
+                  <input class="uk-input" v-model="feedback.city" name="city" id="city" type="text" required>
                 </div>
               </div>
               <div class="uk-margin">
                 <label class="uk-form-label" for="text">Ваш отзыв</label>
                 <div class="uk-form-controls">
-                  <textarea class="uk-textarea" name="text" id="text" required rows="5"></textarea>
+                  <textarea class="uk-textarea" v-model="feedback.text" name="text" id="text" required
+                            rows="5"></textarea>
                 </div>
               </div>
               <div class="uk-align-right">
@@ -35,26 +36,50 @@
       </div>
     </div>
     <hr>
-    <div class="uk-width-1-1">
-      <article class="uk-comment" v-for="feed in feedback_list" :key="feed.id">
-        <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
-          <div class="uk-width-expand">
-            <h5 class="uk-comment-title uk-text-small uk-margin-remove">{{feed.name}}</h5>
-            <ul class="uk-comment-meta uk-text-small uk-subnav uk-subnav-divider uk-margin-remove-top">
-              <li><span>{{feed.created_at}}</span></li>
-              <li v-if="isAuth"><a href="#">Ответить</a></li>
-            </ul>
+    <ul class="uk-comment-list uk-width-1-1">
+      <li v-for="feed in feedback_list" :key="feed.id" class="uk-margin">
+        <article class="uk-comment uk-margin-small">
+          <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+            <div class="uk-width-expand">
+              <h5 class="uk-comment-title uk-text-small uk-margin-remove">{{feed.name}}</h5>
+              <ul class="uk-comment-meta uk-text-small uk-subnav uk-subnav-divider uk-margin-remove-top">
+                <li><span>{{feed.created_at}}</span></li>
+                <li v-if="isAuth === 'True'">
+                  <button class="uk-button uk-button-small uk-button-text" v-on:click="answer(feed.id)">Ответить
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </header>
+          <div class="uk-comment-body">
+            <p class="uk-text-small">{{feed.text}}</p>
           </div>
-        </header>
-        <div class="uk-comment-body">
-          <p class="uk-text-small">{{feed.text}}</p>
-        </div>
-      </article>
-    </div>
+        </article>
+        <ul v-if="feed.answers" class="uk-margin">
+          <li v-for="answer in feed.answers" :key="answer.id" class="uk-margin">
+            <article class="uk-comment uk-comment-answer uk-margin-small">
+              <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+                <div class="uk-width-expand">
+                  <h5 class="uk-comment-title uk-text-small uk-margin-remove">{{answer.name}}</h5>
+                  <ul class="uk-comment-meta uk-text-small uk-subnav uk-subnav-divider uk-margin-remove-top">
+                    <li><span>{{answer.created_at}}</span></li>
+                  </ul>
+                </div>
+              </header>
+              <div class="uk-comment-body">
+                <p class="uk-text-small">{{answer.text}}</p>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+    import UIkit from 'uikit'
+
     export default {
         name: "feedback-form",
         props: ['isAuth'],
@@ -63,7 +88,8 @@
             feedback: {
                 name: null,
                 city: null,
-                text: null
+                text: null,
+                feedback: null
             }
         }),
         created () {
@@ -78,6 +104,32 @@
                     .catch(e => {
                         console.dir(e)
                     })
+            },
+            async sendFeedback () {
+                await this.$axios.post('/api/feedback/send/', this.feedback)
+                    .then(this.renew())
+                    .catch(e => {
+                        console.dir(e)
+                    })
+            },
+            answer (id) {
+                this.feedback = {
+                    name: 'Гостевой дом "Маяк"',
+                    city: 'Голубицкая',
+                    text: null,
+                    feedback: id
+                }
+                UIkit.modal(document.getElementById('feedback-form')).show()
+            },
+            async renew () {
+                await this.getFeedbackList()
+                this.feedback = {
+                    name: null,
+                    city: null,
+                    text: null,
+                    feedback: null
+                }
+                UIkit.modal(document.getElementById('feedback-form')).hide()
             }
         }
     }

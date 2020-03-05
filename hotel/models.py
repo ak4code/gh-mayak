@@ -29,6 +29,8 @@ class Feedback(models.Model):
     name = models.CharField(max_length=150, verbose_name='Имя')
     city = models.CharField(max_length=150, null=True, blank=True, verbose_name='Город')
     text = models.TextField(blank=True, null=True, verbose_name='Отзыв')
+    feedback = models.ForeignKey('self', related_name='answers', blank=True, null=True, on_delete=models.CASCADE,
+                                 verbose_name='Отзыв')
     created_at = models.DateTimeField(auto_now=True, verbose_name='Дата отзыва')
 
     def __str__(self):
