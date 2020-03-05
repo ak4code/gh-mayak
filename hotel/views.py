@@ -20,9 +20,19 @@ class FeedbackListView(TemplateView):
 
 
 class FeedbackViewSet(viewsets.ModelViewSet):
-    queryset = Feedback.objects.all()
+    queryset = Feedback.objects.filter(feedback=None)
     serializer_class = FeedbackSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+    @action(detail=False, permission_classes=[AllowAny], methods=['post'])
+    def send(self, request):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
 
 
 class BookingViewSet(viewsets.ModelViewSet):

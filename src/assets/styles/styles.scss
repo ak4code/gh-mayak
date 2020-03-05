@@ -92,5 +92,9 @@ a {
   .uk-modal-dialog {
     background: #e2e2e2;
   }
+}
 
+.uk-comment-answer {
+  border-left: 2px dashed $primary-color;
+  padding-left: 10px;
 }
