@@ -18,6 +18,7 @@ class SiteConfig(SingletonModel):
                                       on_delete=models.SET_NULL)
     logo = models.FileField(upload_to='site/', blank=True, null=True, verbose_name='Логотип')
     favicon = models.ImageField(upload_to='site/', blank=True, null=True, verbose_name='Значок сайта')
+    footer = HTMLField(blank=True, null=True, verbose_name='Футер')
 
     def __str__(self):
         return self.site_name
