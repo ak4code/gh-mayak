@@ -62,9 +62,6 @@ class Menu(models.Model):
     POSITON_CHOICES = (
         (None, 'Выберите позицию'),
         ('main', 'Главное меню'),
-        ('mobile', 'Мобильное меню'),
-        ('side', 'Боковое меню'),
-        ('footer', 'Подвал'),
     )
     name = models.CharField(max_length=200, verbose_name='Название меню')
     position = models.CharField(max_length=100, choices=POSITON_CHOICES, unique=True, db_index=True,
