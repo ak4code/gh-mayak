@@ -109,7 +109,7 @@
             <div class="uk-padding">
                 <div class="uk-flex uk-flex-wrap uk-grid-small">
                     <div class="uk-width-1-4@m uk-width-1-1">
-                        <h5 class="uk-h5">Навигация</h5>
+                        <h5 class="m-footer-heading">Навигация</h5>
                         {% nav_menu 'main' as footer_menu %}
                         {% if footer_menu %}
                             <ul class="uk-nav uk-margin-auto-vertical">
@@ -124,12 +124,12 @@
                             </ul>
                         {% endif %}
                     </div>
-                    <div class="uk-width-auto">
-                        <h5 class="uk-h5">Информация</h5>
+                    <div class="uk-width-expand">
+                        <h5 class="m-footer-heading">Информация</h5>
                         {{ mayak.footer | safe }}
                     </div>
                     <div class="uk-width-1-4@m uk-width-1-1">
-                        <h5 class="uk-h5">Поделись ссылкой</h5>
+                        <h5 class="m-footer-heading">Поделись ссылкой</h5>
                         <div class="share-btn">
                             <script type="application/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
                             <script type="application/javascript" src="//yastatic.net/share2/share.js"></script>

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.contenttypes.admin import GenericTabularInline
 from solo.admin import SingletonModelAdmin
 from .models import Page, SiteConfig, Menu, MenuItem
 from genericadmin.admin import GenericAdminModelAdmin, TabularInlineWithGeneric
@@ -6,9 +7,15 @@ from genericadmin.admin import GenericAdminModelAdmin, TabularInlineWithGeneric
 admin.site.register(SiteConfig, SingletonModelAdmin)
 
 
+class MenuItemsGeneric(GenericTabularInline):
+    model = MenuItem
+    extra = 1
+
+
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
     list_display = ('title', 'home', 'slug', 'created', 'updated')
+    inlines = (MenuItemsGeneric,)
     fieldsets = (
         (None, {
             'fields': ('title', 'content')
