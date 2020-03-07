@@ -20,6 +20,10 @@ from django.conf.urls.static import static
 from filebrowser.sites import site
 from .api import router
 
+admin.site.site_title = 'ГД Маяк'
+admin.site.site_header = 'ГД Маяк'
+
+
 urlpatterns = [
     path('admin/filebrowser/', site.urls),
     path('admin/', admin.site.urls),

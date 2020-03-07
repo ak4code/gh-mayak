@@ -1,4 +1,4 @@
-from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.urls import reverse
@@ -46,6 +46,7 @@ class SEOBase(models.Model):
 class Page(SEOBase):
     title = models.CharField(max_length=255, verbose_name='Заголовок')
     content = HTMLField(blank=True, null=True, verbose_name='Контент')
+    menu_items = GenericRelation('MenuItem')
 
     def __str__(self):
         return self.title
@@ -87,7 +88,7 @@ class MenuItem(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     def __str__(self):
-        return self.name
+        return f'{self.menu.name} -> {self.name}'
 
     def get_link(self):
         if self.content_object:

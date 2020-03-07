@@ -44,6 +44,7 @@
               <h5 class="uk-comment-title uk-text-small uk-margin-remove">{{feed.name}}</h5>
               <ul class="uk-comment-meta uk-text-small uk-subnav uk-subnav-divider uk-margin-remove-top">
                 <li><span>{{feed.created_at}}</span></li>
+                <li><span>{{feed.city}}</span></li>
                 <li v-if="isAuth === 'True'">
                   <button class="uk-button uk-button-small uk-button-text" v-on:click="answer(feed.id)">Ответить
                   </button>
@@ -63,6 +64,7 @@
                   <h5 class="uk-comment-title uk-text-small uk-margin-remove">{{answer.name}}</h5>
                   <ul class="uk-comment-meta uk-text-small uk-subnav uk-subnav-divider uk-margin-remove-top">
                     <li><span>{{answer.created_at}}</span></li>
+                    <li><span>{{answer.city}}</span></li>
                   </ul>
                 </div>
               </header>
