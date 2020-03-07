@@ -86,6 +86,7 @@ class MenuItem(models.Model):
                                      verbose_name='Тип контента')
     object_id = models.PositiveIntegerField(blank=True, null=True, verbose_name='ID обьекта')
     content_object = GenericForeignKey('content_type', 'object_id')
+    item_order = models.PositiveIntegerField(default=0, editable=False, db_index=True, verbose_name='Сортировка')
 
     def __str__(self):
         return f'{self.menu.name} -> {self.name}'
@@ -99,5 +100,6 @@ class MenuItem(models.Model):
             return '#'
 
     class Meta:
+        ordering = ['item_order']
         verbose_name = 'Пункт меню'
         verbose_name_plural = 'Пункты меню'

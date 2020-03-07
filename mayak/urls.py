@@ -19,10 +19,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from filebrowser.sites import site
 from .api import router
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import sitemaps
 
 admin.site.site_title = 'ГД Маяк'
 admin.site.site_header = 'ГД Маяк'
-
 
 urlpatterns = [
     path('admin/filebrowser/', site.urls),
@@ -30,6 +31,8 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
     path('hotel/', include('hotel.urls')),
     path('api/', include(router.urls)),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
     path('', include('cms.urls')),
 ]
 

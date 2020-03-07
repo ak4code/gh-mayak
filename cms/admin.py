@@ -3,6 +3,7 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 from solo.admin import SingletonModelAdmin
 from .models import Page, SiteConfig, Menu, MenuItem
 from genericadmin.admin import GenericAdminModelAdmin, TabularInlineWithGeneric
+from adminsortable.admin import SortableAdmin
 
 admin.site.register(SiteConfig, SingletonModelAdmin)
 
@@ -41,3 +42,8 @@ class MenuItemInlines(TabularInlineWithGeneric):
 @admin.register(Menu)
 class MenuAdmin(GenericAdminModelAdmin):
     inlines = (MenuItemInlines,)
+
+
+@admin.register(MenuItem)
+class MenuItemAdmin(SortableAdmin):
+    pass
