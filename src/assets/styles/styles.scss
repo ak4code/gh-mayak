@@ -11,6 +11,10 @@
 // 4. Import UIkit.
 @import "~uikit/src/scss/uikit.scss";
 
+@font-face {
+  font-display: swap;
+}
+
 a {
   &:hover {
     text-decoration: none;
@@ -18,7 +22,7 @@ a {
 }
 
 #app {
-  background-image: url("../images/background.jpg");
+  background-image: url("../images/background.webp");
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -104,3 +108,4 @@ a {
   border-left: 2px dashed $primary-color;
   padding-left: 10px;
 }
+

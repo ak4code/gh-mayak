@@ -14,12 +14,13 @@ class StaticViewSitemap(sitemaps.Sitemap):
     def location(self, item):
         return reverse(item)
 
+
 class PageSitemap(sitemaps.Sitemap):
     changefreq = "never"
     priority = 0.8
 
     def items(self):
-        return Page.objects.all()
+        return Page.objects.filter(is_front=None)
 
     def lastmod(self, obj):
         return obj.updated
