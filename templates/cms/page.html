@@ -1,4 +1,4 @@
-{% extends 'layouts/default.html' %}
+{% extends page.get_template_display %}
 
 {% block title %}{{ page.meta_title }} | {{ block.super }}{% endblock %}
 {% block meta_description %}{{ page.meta_description }}{% endblock %}

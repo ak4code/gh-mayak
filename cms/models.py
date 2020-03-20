@@ -5,12 +5,13 @@ from django.urls import reverse
 from solo.models import SingletonModel
 from tinymce import HTMLField
 from uuslug import uuslug
+from adminsortable.models import SortableMixin
 
 
 class SiteConfig(SingletonModel):
     site_name = models.CharField(max_length=255, default='Мой сайт', verbose_name='Название сайта')
     meta_description = models.TextField(blank=True, null=True, verbose_name='Мета описание')
-    phone = models.CharField(max_length=255, blank=True, null=True, verbose_name='Телефон')
+    phone = models.TextField(max_length=1000, blank=True, null=True, verbose_name='Телефон')
     address = models.CharField(max_length=255, blank=True, null=True, verbose_name='Адрес')
     maintenance_mode = models.BooleanField(default=False, verbose_name='Режим обслуживания')
     front_page = models.OneToOneField('Page', blank=True, related_name='is_front', null=True,
@@ -44,9 +45,14 @@ class SEOBase(models.Model):
 
 
 class Page(SEOBase):
+    TEMPLATE_CHOICE = (
+        ('aside', 'layouts/default.html'),
+        ('full', 'layouts/full-width.html'),
+    )
     title = models.CharField(max_length=255, verbose_name='Заголовок')
     content = HTMLField(blank=True, null=True, verbose_name='Контент')
     menu_items = GenericRelation('MenuItem')
+    template = models.CharField(max_length=250, default='aside', choices=TEMPLATE_CHOICE, verbose_name='Шаблон')
 
     def __str__(self):
         return self.title
@@ -76,7 +82,7 @@ class Menu(models.Model):
         verbose_name_plural = 'Меню'
 
 
-class MenuItem(models.Model):
+class MenuItem(SortableMixin):
     menu = models.ForeignKey(Menu, related_name='items', on_delete=models.CASCADE, verbose_name='Меню')
     name = models.CharField(max_length=200, verbose_name='Название')
     parent = models.ForeignKey('self', related_name='childs', blank=True, null=True, on_delete=models.SET_NULL,

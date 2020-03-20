@@ -31,7 +31,7 @@ class Feedback(models.Model):
     text = models.TextField(blank=True, null=True, verbose_name='Отзыв')
     feedback = models.ForeignKey('self', related_name='answers', blank=True, null=True, on_delete=models.CASCADE,
                                  verbose_name='Отзыв')
-    created_at = models.DateTimeField(auto_now=True, verbose_name='Дата отзыва')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата отзыва')
 
     def __str__(self):
         return self.name

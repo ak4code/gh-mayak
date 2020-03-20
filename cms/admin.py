@@ -3,7 +3,7 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 from solo.admin import SingletonModelAdmin
 from .models import Page, SiteConfig, Menu, MenuItem
 from genericadmin.admin import GenericAdminModelAdmin, TabularInlineWithGeneric
-from adminsortable.admin import SortableAdmin
+from adminsortable.admin import SortableAdmin, SortableGenericTabularInline
 
 admin.site.register(SiteConfig, SingletonModelAdmin)
 
@@ -19,7 +19,7 @@ class PageAdmin(admin.ModelAdmin):
     inlines = (MenuItemsGeneric,)
     fieldsets = (
         (None, {
-            'fields': ('title', 'content')
+            'fields': ('title', 'content', 'template')
         }),
         ('SEO настройки', {
             'classes': ('wide',),
@@ -42,8 +42,9 @@ class MenuItemInlines(TabularInlineWithGeneric):
 @admin.register(Menu)
 class MenuAdmin(GenericAdminModelAdmin):
     inlines = (MenuItemInlines,)
+    content_type_whitelist = ('cms/page',)
 
 
 @admin.register(MenuItem)
 class MenuItemAdmin(SortableAdmin):
-    pass
+    list_display = ['name', 'menu', ]
